@@ -21,11 +21,14 @@ env:
 
 jobs:
   detect-modules:
-    runs-on: ubuntu-latest
+    runs-on: linux-s
     timeout-minutes: 10
     outputs:
       modules: ${{ steps.set-modules.outputs.modules }}
     steps:
+      - name: Install git
+        run: sudo apt-get update && sudo apt-get install -y git
+
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
           persist-credentials: false
@@ -34,12 +37,15 @@ jobs:
 
   golang:
     needs: detect-modules
-    runs-on: ubuntu-latest
+    runs-on: linux-m
     timeout-minutes: 10
     strategy:
       matrix:
         modules: ${{ fromJSON(needs.detect-modules.outputs.modules) }}
     steps:
+      - name: Install git
+        run: sudo apt-get update && sudo apt-get install -y git
+
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # ratchet:actions/checkout@v6
         with:
           persist-credentials: false

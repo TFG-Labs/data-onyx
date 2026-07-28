@@ -29,13 +29,16 @@ permissions: {}
 jobs:
   audit:
     name: audit
-    runs-on: ubuntu-latest
+    runs-on: linux-s
     timeout-minutes: 20
     permissions:
       contents: read # checkout + read lockfiles
       id-token: write # OIDC for fetching the S3 allowlist
       security-events: write # SARIF upload (nightly) + read Dependabot alerts
     steps:
+      - name: Install git
+        run: sudo apt-get update && sudo apt-get install -y git
+
       - name: Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # ratchet:actions/checkout@v6
         with:

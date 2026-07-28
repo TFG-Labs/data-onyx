@@ -19,9 +19,12 @@ permissions:
 jobs:
   jest-tests:
     name: Jest Tests
-    runs-on: ubuntu-latest
+    runs-on: linux-m
     timeout-minutes: 10
     steps:
+      - name: Install git
+        run: sudo apt-get update && sudo apt-get install -y git
+
       - name: Checkout code
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # ratchet:actions/checkout@v6
         with:
