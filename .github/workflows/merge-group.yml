@@ -13,7 +13,7 @@ jobs:
   # exists solely to provide a fast-passing check with the same name for branch protection.
   # The actual tests remain enforced on presubmit (pull_request events).
   required:
-    runs-on: ubuntu-latest
+    runs-on: linux-s
     timeout-minutes: 45
     steps:
       - name: Success
@@ -24,7 +24,7 @@ jobs:
   # this job exists solely to provide a fast-passing check with the same name for branch protection.
   # The actual tests remain enforced on presubmit (pull_request events).
   playwright-required:
-    runs-on: ubuntu-latest
+    runs-on: linux-s
     timeout-minutes: 45
     steps:
       - name: Success
