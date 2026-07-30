@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   validate_pr_title:
-    runs-on: ubuntu-latest
+    runs-on: linux-s
     timeout-minutes: 45
     steps:
       - name: Check PR title for Conventional Commits
