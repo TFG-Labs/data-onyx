@@ -1,0 +1,36 @@
+# Argo CI (dispatcher: devex-shared-services/cicd/argo-dispatcher).
+#
+# Danger JS only. The rest of this repo's CI stays on GitHub Actions;
+# danger-pipeline-v1 is standalone (argo ADR-043) so a repo that runs no Go or
+# Node pipeline here can still get a pull request review.
+#
+# The dangerfile carries the two pull request gates that were GitHub Actions
+# jobs: the conventional-commit title check from pr-labeler.yml, and the Linear
+# reference check from pr-linear-check.yml.
+#
+# branches [main]: pr-labeler.yml filtered to main and pr-linear-check.yml did
+# not, so this narrows the Linear check to pull requests that target main.
+# Stacked pull requests into a feature branch reach main through their parent,
+# which is gated.
+#
+# paths "**": both rules read pull request metadata, which every pull request
+# has, and a path-filtered check reports as skipped, which reads as satisfied
+# rather than as not run.
+#
+# Neither rule re-runs on an edit. The dispatcher drops the `edited` delivery at
+# ingest, so adding the Linear link or fixing the title after opening needs a
+# push to the branch. Both workflows listed `edited` and GitHub Actions matched
+# the type itself, so this is the one behaviour the move does not preserve.
+version: v1
+
+workflows:
+  - name: data-onyx-danger
+    template: danger-pipeline-v1
+    on:
+      github:
+        pull_request:
+          branches: [main]
+          types: [opened, synchronize, reopened, ready_for_review]
+        push: null
+    paths:
+      - "**"
