@@ -17,10 +17,10 @@
 # has, and a path-filtered check reports as skipped, which reads as satisfied
 # rather than as not run.
 #
-# Neither rule re-runs on an edit. The dispatcher drops the `edited` delivery at
-# ingest, so adding the Linear link or fixing the title after opening needs a
-# push to the branch. Both workflows listed `edited` and GitHub Actions matched
-# the type itself, so this is the one behaviour the move does not preserve.
+# `edited` keeps what the workflows had: adding the Linear link or fixing the
+# title re-runs the rules, and no push does either (argo ADR-074). The other
+# four are the dispatcher defaults, restated because `types:` replaces the
+# default list rather than adding to it.
 version: v1
 
 workflows:
@@ -30,7 +30,7 @@ workflows:
       github:
         pull_request:
           branches: [main]
-          types: [opened, synchronize, reopened, ready_for_review]
+          types: [opened, synchronize, reopened, ready_for_review, edited]
         push: null
     paths:
       - "**"
