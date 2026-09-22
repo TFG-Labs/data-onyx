@@ -1,25 +1,3 @@
-# Argo CI (dispatcher: devex-shared-services/cicd/argo-dispatcher).
-#
-# Danger JS only. The rest of this repo's CI stays on GitHub Actions;
-# danger-pipeline-v1 is standalone (argo ADR-043) so a repo that runs no Go or
-# Node pipeline here can still get a pull request review.
-#
-# The dangerfile carries the Linear reference check that was the GitHub Actions
-# job in pr-linear-check.yml. The conventional-commit title check stays in
-# .github/workflows/pr-labeler.yml.
-#
-# branches [main]: pr-linear-check.yml did not filter by base branch, so this
-# narrows the check to pull requests that target main. Stacked pull requests
-# into a feature branch reach main through their parent, which is gated.
-#
-# paths "**": the rule reads pull request metadata, which every pull request
-# has, and a path-filtered check reports as skipped, which reads as satisfied
-# rather than as not run.
-#
-# `edited` keeps what the workflow had: adding the Linear link re-runs the rule,
-# and no push does that (argo ADR-074). The other four are the dispatcher
-# defaults, restated because `types:` replaces the default list rather than
-# adding to it.
 version: v1
 
 workflows:
