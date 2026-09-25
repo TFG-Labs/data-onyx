@@ -37,7 +37,7 @@ jobs:
 
   golang:
     needs: detect-modules
-    runs-on: linux-m
+    runs-on: linux-s
     timeout-minutes: 10
     strategy:
       matrix:

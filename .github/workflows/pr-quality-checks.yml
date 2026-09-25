@@ -17,7 +17,7 @@ permissions:
 
 jobs:
   quality-checks:
-    runs-on: linux-m
+    runs-on: linux-s
     timeout-minutes: 15
     steps:
       - name: Install git

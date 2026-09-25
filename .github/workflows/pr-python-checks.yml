@@ -51,7 +51,7 @@ jobs:
     if: needs.changes.outputs.python == 'true'
     # NOTE: This job is named mypy-check for branch protection compatibility,
     # but it actually runs ty (astral-sh's Rust type checker).
-    runs-on: linux-m
+    runs-on: linux-s
     timeout-minutes: 8
 
     steps:

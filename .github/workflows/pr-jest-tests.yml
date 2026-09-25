@@ -19,7 +19,7 @@ permissions:
 jobs:
   jest-tests:
     name: Jest Tests
-    runs-on: linux-m
+    runs-on: linux-s
     timeout-minutes: 10
     steps:
       - name: Install git
